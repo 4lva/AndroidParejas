@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton ibd;
     int ultimaFoto;
     int i = 0;
-    int acabado=0;
+    int completado = 0;
+    ArrayList<Integer> parejas = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,33 +63,36 @@ public class MainActivity extends AppCompatActivity {
         //asignamos la imagen al boton
         if (view.getId() == ib1.getId()) {
             ib1.setImageResource(fotos.get(0));
-            jugar(ib1,fotos.get(0));
+            jugar(ib1, fotos.get(0));
         }
         if (view.getId() == ib2.getId()) {
             ib2.setImageResource(fotos.get(1));
-            jugar(ib2,fotos.get(1));
+            jugar(ib2, fotos.get(1));
         }
         if (view.getId() == ib3.getId()) {
             ib3.setImageResource(fotos.get(2));
-            jugar(ib3,fotos.get(2));
+            jugar(ib3, fotos.get(2));
         }
         if (view.getId() == ib4.getId()) {
             ib4.setImageResource(fotos.get(3));
-            jugar(ib4,fotos.get(3));
+            jugar(ib4, fotos.get(3));
         }
         if (view.getId() == ib5.getId()) {
             ib5.setImageResource(fotos.get(4));
-            jugar(ib5,fotos.get(4));
+            jugar(ib5, fotos.get(4));
         }
         if (view.getId() == ib6.getId()) {
             ib6.setImageResource(fotos.get(5));
-            jugar(ib6,fotos.get(5));
+            jugar(ib6, fotos.get(5));
         }
     }
 
-    public void jugar(ImageButton iibb,int fotoo) {
+    public void jugar(ImageButton iibb, int fotoo) {
         //controlamos la logica del programa donde mantendremos las fotos correctas o la ultima dada
-        if(acabado!=3) {
+        for (int i = 0; i < parejas.size(); i++) {
+            if (parejas.get(i) == fotoo) completado = 1;
+        }
+        if (completado != 1) {
             if (i == 0) {
                 ibd = iibb;
                 ultimaFoto = fotoo;
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (i == 1) {
                 if (ultimaFoto == fotoo) {
                     i = 0;
-                    acabado++;
+                    parejas.add(fotoo);
                 } else {
                     ibd.setImageResource(R.drawable.posterior);
                     ibd = iibb;
@@ -104,5 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        completado = 0;
     }
 }
